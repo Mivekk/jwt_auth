@@ -1,4 +1,6 @@
+import ApolloWrapper from "@/lib/apollo-wrapper";
 import "./globals.css";
+import Link from "next/link";
 
 export const metadata = {
   title: "JWT Authentication",
@@ -12,7 +14,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ApolloWrapper>
+          <div className="flex gap-1 text-blue-600">
+            <Link href={"/"}>home</Link>
+            <Link href={"/login"}>login</Link>
+            <Link href={"/register"}>register</Link>
+          </div>
+          {children}
+        </ApolloWrapper>
+      </body>
     </html>
   );
 }

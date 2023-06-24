@@ -79,11 +79,11 @@ export class UserResolver {
     };
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => [User], { nullable: true })
   async register(
     @Arg("email") email: string,
     @Arg("password") password: string
-  ): Promise<boolean> {
+  ): Promise<User[] | null> {
     const hashedPassword = await argon2.hash(password);
 
     try {
@@ -93,9 +93,9 @@ export class UserResolver {
       });
     } catch (err) {
       console.log(err);
-      return false;
+      return null;
     }
 
-    return true;
+    return await User.findBy({});
   }
 }
